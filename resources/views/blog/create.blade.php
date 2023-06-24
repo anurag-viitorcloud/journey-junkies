@@ -1240,7 +1240,7 @@
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" name="desc" rows="9"></textarea>
+                                    <textarea class="form-control" name="desc" rows="6"></textarea>
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label font-bold">How You Want It?</label>
@@ -1314,10 +1314,11 @@
                             <div id="editor">
                                 @if(!empty($blog))
                                     {!! $blog->post !!}
-                                @endif
-                            </div>
+                                    @endif
+                                </div>
+                                <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
                             <div class="col-sm-12 mt-3 float-right">
-                                <button type="button" class="btn btn-primary go-pro" id="download">Download
+                                <button type="submit" class="btn btn-primary go-pro" id="download">Download
                                 </button>
                             </div>
                         </form>
@@ -1361,23 +1362,23 @@
         var formData = new FormData();
         formData.append('htmldata', $('#editor').html());
 
-    $('#download').on('click', function() {
-        $.ajax({
-            type: "Post",
-            url: "{{ route('convert') }}",
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: formData,
-            processData: false, contentType: false,
-            success: function (data) {
-                // console.log(datas);
-            },
-            error: function (data) {
-                console.log('An error occurred.');
-            },
-        });
-    });
+    // $('#download').on('click', function() {
+    //     $.ajax({
+    //         type: "Post",
+    //         url: "{{ route('convert') }}",
+    //         headers: {
+    //             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         data: formData,
+    //         processData: false, contentType: false,
+    //         success: function (data) {
+    //             // console.log(datas);
+    //         },
+    //         error: function (data) {
+    //             console.log('An error occurred.');
+    //         },
+    //     });
+    // });
  
        </script>
          <script>

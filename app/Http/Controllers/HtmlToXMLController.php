@@ -42,10 +42,10 @@ class HtmlToXMLController extends Controller
 
         // $response = Response::create($xml, 200);
         $response->header('Cache-Control', 'public');
-$response->header('Content-Description', 'File Transfer');
-$response->header('Content-Disposition', 'attachment; filename=test.xml');
-$response->header('Content-Transfer-Encoding', 'binary');
-$response->header('Content-Type', 'text/xml');
+        $response->header('Content-Description', 'File Transfer');
+        $response->header('Content-Disposition', 'attachment; filename=test.xml');
+        $response->header('Content-Transfer-Encoding', 'binary');
+        $response->header('Content-Type', 'text/xml');
         return $response;
         // Return the XML response
         // dd( Response::make($xml, 200, $headers));

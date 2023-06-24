@@ -25,6 +25,7 @@ Route::get('/blog', function () {
 })->name('blog');
 
 Route::get('/create-blog', [App\Http\Controllers\openAIController::class, 'createContent'])->name('create-blog');
+Route::post('/create-caption', [App\Http\Controllers\ImageController::class, 'createContent'])->name('create-caption');
 Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -35,6 +36,11 @@ Route::get('/convertData', function () {
 })->name('convertData');
 
 Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
+Route::post('/sendToZapier', [App\Http\Controllers\ShareBlogController::class, 'sendToZapier'])->name('sendToZapier');
+
+Route::get('/twitter/redirect', [App\Http\Controllers\ShareBlogController::class, 'redirect']);
+Route::get('/twitter/callback', [App\Http\Controllers\ShareBlogController::class, 'callback']);
+
 
 Route::get('/social-media', function () {
     return view('socialMedia.create');

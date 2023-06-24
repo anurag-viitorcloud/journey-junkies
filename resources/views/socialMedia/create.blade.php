@@ -143,36 +143,37 @@
 
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('create-caption')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <label for="inputNumber" class="col-form-label font-bold">File Upload</label>
                             <div class="flex items-center justify-center w-100 h-70">
-                                <label for="dropzone-file" class="flex flex-col items-center justify-center w-100 h-50 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-600 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                                <label for="dropzone-file"
+                                    class="flex flex-col items-center justify-center w-100 h-50 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-600 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-300"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                                        <svg aria-hidden="true" class="w-10 h-10 mb-3 text-gray-300" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                            </path>
+                                        </svg>
+                                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-300"><span
+                                                class="font-semibold">Click to upload</span> or drag and drop</p>
                                         <p class="text-xs text-gray-500 dark:text-gray-300">PNG or JPG</p>
                                     </div>
                                     <input id="dropzone-file" type="file" name="image" class="hidden" />
                                 </label>
                             </div> 
-                            <label for="inputNumber" class="col-form-label">Description</label>
-                            <div class="row mb-3">
-                                <div class="col-sm-12">
-                                    <textarea class="form-control" style="height: 100px"></textarea>
-                                </div>
-                            </div>
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" rows="9"></textarea>
+                                    <textarea class="form-control" rows="6" name="desc"></textarea>
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label font-bold">How You Want It?</label>
                             <div class="row">
                                 <div class="col-md-6">
                                     <button type="button"
-                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2 ">😊
+                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2" name="tag" value="Friendly">😊
                                         Friendly</button>
                                 </div>
                                 <div class="col-md-6">
@@ -213,9 +214,8 @@
                                         Bold</button>
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <button type="sumit" class="btn btn-primary go-pro" style="margin: 15px;">Write for me
-                                    👉</button>
+                            <div class="row mt-3">
+                                <button type="submit" class="btn btn-primary go-pro" id="writeContent">Write for me 👉</button>
                             </div>
                         </form>
                     </div>
@@ -247,7 +247,22 @@
                                             <div class="blob red"></div>
                                         </div>
                                     </div>
-
+                                    <div class="gallery text-justify p-3">
+                                        @if(!empty($filename))
+                                          <img src="{{ asset('socialImage/'.$filename)}}" alt="Cinque Terre" width="600" height="400" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px;">
+                                          @else
+                                          <img src="{{ asset('images/profile-img.jpg')}}" alt="Cinque Terre" width="600" height="400" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px;">
+                                        @endif
+                                            <div class="desc mt-2">
+                                            <h2 class="font-bold">{{'@'.auth()->user()->name}} </h2>
+                                            <p class="mt-2"> 
+                                                @if(!empty($responseData))
+                                                @foreach ($responseData->choices as $caption)
+                                                    {{ $caption->text ?? '' }}
+                                                @endforeach
+                                                @endif
+                                            </p></div>
+                                      </div>
                                     <div class="home"></div>
                                 </div>
                             </div>
@@ -257,8 +272,11 @@
                                     <button class="btn btn-light"><img src="{{ asset('images/copy.png') }}"> Copy</button>
                                     <button class="btn btn-light"><img src="{{ asset('images/instagram.png') }}"
                                             width="15px" height="15px"> Instagram</button>
-                                    <button class="btn btn-light"><img src="{{ asset('images/twitter.png') }}">
+                                            <form method="POST" action="{{ route('sendToZapier') }}">
+                                                @csrf
+                                    <button type="submit" class="btn btn-light"><img src="{{ asset('images/twitter.png') }}">
                                         Twitter</button>
+                                            </form>
 
                                 </div>
 
@@ -284,5 +302,21 @@
                 $(this).toggleClass('active');
             });
         });
+
+    function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#preview').attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#dropzone-file").change(function(){
+    readURL(this);
+});
     </script>
 @endsection
