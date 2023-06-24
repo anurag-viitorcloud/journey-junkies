@@ -20,10 +20,10 @@ class ShareBlogController extends Controller
         $accessTokenSecret = 'OiNi2Yj01GDscplRbIUCYONSegHBO0tcQqVp5QhvbRkb2';
 
         $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-        $media1 = $connection->upload('media/upload', ['media' => "{{ asset('images/profile-img.jpg') }}"]);
+        //$media1 = $connection->upload('media/upload', ['media' => "{{ asset('images/profile-img.jpg') }}"]);
         $parameters = [
             'status' => 'Meow Meow Meow',
-            'media_ids' => implode(',', [$media1->media_id_string, $media1->media_id_string])
+           // 'media_ids' => implode(',', [$media1->media_id_string, $media1->media_id_string])
         ];
         $result = $connection->post('statuses/update', $parameters);
 
