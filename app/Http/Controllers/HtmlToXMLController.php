@@ -68,6 +68,6 @@ class HtmlToXMLController extends Controller
         ];
 
         // Return the PDF response for download
-        return response($pdf->output(), 200, $headers);
+        return response($pdf->download(), 200, $headers);
     }
 }
