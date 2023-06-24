@@ -133,6 +133,15 @@
             ;
             /* Set your desired background color here */
         }
+        .flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.social{
+    display: flex;
+    align-items: center;
+    margin-top: -50px;
+}
     </style>
 @endsection
 
@@ -166,49 +175,57 @@
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" rows="6" name="desc"></textarea>
+                                    <textarea class="form-control" rows="6" name="desc" required></textarea>
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label font-bold">How You Want It?</label>
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="flex-container">
+                                <div class="">
                                     <button type="button"
                                         class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2" name="tag" value="Friendly">😊
                                         Friendly</button>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="">
                                     <button type="button"
                                         class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💎
                                         Luxury</button>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="">
                                     <button type="button"
                                         class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">☺
                                         Relaxed</button>
+                                </div>
+                                <div class="">
                                     <button type="button"
                                         class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💼
                                         Professional</button>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="">
                                     <button type="button"
                                         class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">🏞
                                         Adventurous</button>
+                                    
+                                </div>
+                                <div class="">
+                                    
                                     <button type="button"
                                         class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💡
                                         Witty</button>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="">
                                     <button type="button"
                                         class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">🧠
                                         Persuasive</button>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="">
                                     <button type="button"
                                         class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">🤗
                                         Empathetic</button>
+                                    
+                                </div>
+                                <div class="">
+                                    
                                     <button type="button"
                                         class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💪
                                         Bold</button>
@@ -260,27 +277,30 @@
                                                 @foreach ($responseData->choices as $caption)
                                                     {{ $caption->text ?? '' }}
                                                 @endforeach
+                                                @else
+                                                Write description to generate the caption...
                                                 @endif
                                             </p></div>
                                       </div>
                                     <div class="home"></div>
                                 </div>
-                            </div>
-
-                            <div class="tab-pane fade show active english-data" id="english-data">
-                                <div>
-                                    <button class="btn btn-light"><img src="{{ asset('images/copy.png') }}"> Copy</button>
-                                    <button class="btn btn-light"><img src="{{ asset('images/instagram.png') }}"
-                                            width="15px" height="15px"> Instagram</button>
-                                            <form method="POST" action="{{ route('sendToZapier') }}">
-                                                @csrf
-                                    <button type="submit" class="btn btn-light"><img src="{{ asset('images/twitter.png') }}">
-                                        Twitter</button>
-                                            </form>
-
+                                <div class="tab-pane fade show active english-data" id="english-data">
+                                    <div class="social"> 
+                                        <button class="btn btn-light"><img src="{{ asset('images/copy.png') }}"> Copy</button>
+                                        <button class="btn btn-light"><img src="{{ asset('images/instagram.png') }}"
+                                                width="15px" height="15px"> Instagram</button>
+                                                <form method="POST" action="{{ route('sendToZapier') }}">
+                                                    @csrf
+                                        <button type="submit" class="btn btn-light"><img src="{{ asset('images/twitter.png') }}">
+                                            Twitter</button>
+                                                </form>
+    
+                                    </div>
+    
                                 </div>
-
                             </div>
+
+                            
 
 
                         </div><!-- End Bordered Tabs -->
