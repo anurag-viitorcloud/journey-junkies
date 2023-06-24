@@ -70,7 +70,7 @@ class ImageController extends Controller
             
                 if ($responseData) {
                     $blog = Blog::create([
-                        'title' => Constant::NULL,
+                        'title' => $filename,
                         'description' => Constant::NULL,
                         'post' => $responseData->choices[Constant::STATUS_ZERO]->text,
                         'prompt' =>  "Act like a content writer and give me a travel blog for me in HTML body. I travelled on ".$imageData->original['date_taken']." to ".$imageData->original['location'].". Also, This blog must be creative, SEO friendly & ".$request['desc']." and must not have repeated texts",

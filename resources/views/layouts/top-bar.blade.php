@@ -18,13 +18,6 @@
           </a>
         </li><!-- End Search Icon-->
 
-        <li class="nav-item dropdown">
-
-          <button class="btn btn-primary go-pro" style="margin: 15px;">Go Pro</button>
-
-
-        </li><!-- End Notification Nav -->
-
 
         <li class="nav-item dropdown pe-3">
 
@@ -35,7 +28,7 @@
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6>{{auth()->user()->name}}</h6>
               <span>Web Designer</span>
             </li>
             <li>

@@ -16,7 +16,7 @@
         box-sizing: border-box;
         font-family: Helvetica, Arial, sans-serif;
         font-size: 13px;
-        height: 100%;
+        height: 100vh !important;
         margin: 0px;
         position: relative;
     }
@@ -1189,7 +1189,10 @@
   justify-content: center;
   align-items: center;
 }
-
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
 </style>
 @section('content')
     <section class="section profile">
@@ -1232,51 +1235,59 @@
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" name="desc" rows="6"></textarea>
+                                    <textarea class="form-control" name="desc" rows="6" required></textarea>
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label font-bold">How You Want It?</label>
-                            <div class="row">
-                                <div class="col-md-6">
+                            <div class="flex-container">
+                                <div class="">
                                     <button type="button"
-                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2 ">😊
+                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2" name="tag" value="Friendly">😊
                                         Friendly</button>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="">
                                     <button type="button"
-                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">💎
+                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💎
                                         Luxury</button>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="">
                                     <button type="button"
-                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">☺
+                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">☺
                                         Relaxed</button>
+                                </div>
+                                <div class="">
                                     <button type="button"
-                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">💼
+                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💼
                                         Professional</button>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
+                                <div class="">
                                     <button type="button"
-                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">🏞
+                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">🏞
                                         Adventurous</button>
+                                    
+                                </div>
+                                <div class="">
+                                    
                                     <button type="button"
-                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">💡
+                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💡
                                         Witty</button>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="">
                                     <button type="button"
-                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">🧠
+                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">🧠
                                         Persuasive</button>
                                 </div>
-                                <div class="col-md-12">
+                                <div class="">
                                     <button type="button"
-                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">🤗
+                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">🤗
                                         Empathetic</button>
+                                    
+                                </div>
+                                <div class="">
+                                    
                                     <button type="button"
-                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">💪
+                                        class="text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2">💪
                                         Bold</button>
                                 </div>
                             </div>
@@ -1306,6 +1317,9 @@
                             <div id="editor">
                                 @if(!empty($blog))
                                     {!! $blog->post !!}
+                                    @if(!empty($blog->title))
+                                        <img src="{{ asset('blogImage/'.$blog->title)}}" alt="Cinque Terre" width="400" height="200" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px; float:center;">
+                                        @endif
                                     @endif
                                 </div>
                                 <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
