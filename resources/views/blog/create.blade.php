@@ -4,7 +4,8 @@
     <style>
         .btn.active {
             background-color: #2F2EE9 !important;
-            color: #FFF !important;;
+            color: #FFF !important;
+            ;
             /* Set your desired background color here */
         }
     </style>
