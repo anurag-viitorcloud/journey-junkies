@@ -1292,6 +1292,8 @@
                             <div class="col-sm-12 mt-3 float-right">
                                 <button type="button" class="btn btn-primary go-pro" id="download">Download
                                 </button>
+                                <button type="button" class="btn btn-primary go-pro m-2" id="pdf">PDF
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -1336,6 +1338,27 @@
         $.ajax({
             type: "Post",
             url: "{{ route('convert') }}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: formData,
+            processData: false, contentType: false,
+            success: function (data) {
+                // console.log(datas);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+            },
+        });
+    });
+
+    var formData = new FormData();
+        formData.append('htmldata', $('#editor').html());
+
+    $('#pdf').on('click', function() {
+        $.ajax({
+            type: "Post",
+            url: "{{ route('convert-pdf') }}",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },

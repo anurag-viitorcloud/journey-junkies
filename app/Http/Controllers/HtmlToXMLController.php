@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use DOMDocument;
 
@@ -36,20 +37,37 @@ class HtmlToXMLController extends Controller
         // $headers = [
         //     'Content-Type' => 'application/xml',
         // ];
-        $headers = ['Content-Type' => 'application/xml', 'Content-Disposition' => 'attachment; filename="converted_file.xml"', ]; // Create a Laravel response with the XML content and headers
+        $headers = ['Content-Type' => 'application/xml', 'Content-Disposition' => 'attachment; filename="converted_file.xml"',]; // Create a Laravel response with the XML content and headers
         $response = Response::make($xml, 200, $headers); // Return the response to initiate the file download
         // return $response;
 
         // $response = Response::create($xml, 200);
         $response->header('Cache-Control', 'public');
-$response->header('Content-Description', 'File Transfer');
-$response->header('Content-Disposition', 'attachment; filename=test.xml');
-$response->header('Content-Transfer-Encoding', 'binary');
-$response->header('Content-Type', 'text/xml');
+        $response->header('Content-Description', 'File Transfer');
+        $response->header('Content-Disposition', 'attachment; filename=test.xml');
+        $response->header('Content-Transfer-Encoding', 'binary');
+        $response->header('Content-Type', 'text/xml');
         return $response;
         // Return the XML response
         // dd( Response::make($xml, 200, $headers));
         //echo $xml;
-       // dd($xml);
+        // dd($xml);
+    }
+
+    public function converToPDF(Request $request)
+    {
+        $html = $request['htmldata'];
+
+        // Generate PDF using the HTML content
+        $pdf = PDF::loadHTML($html);
+
+        // Set the appropriate headers for PDF response
+        $headers = [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="converted_file.pdf"',
+        ];
+
+        // Return the PDF response for download
+        return response($pdf->output(), 200, $headers);
     }
 }
