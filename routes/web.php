@@ -24,17 +24,26 @@ Route::get('/blog', function () {
     return view('blog.create');
 })->name('blog');
 
+Route::get('/social-media', function () {
+    return view('socialMedia.create');
+})->name('social-media');
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/blogs',BlogController::class);
-Route::resource('/dashboards',BlogController::class);
+Route::get('/mobile-view', function () {
+    return view('socialMedia.mobile-view');
+})->name('mobile-view');
 
-Route::view('/blog-create','blog.create');
 
-Route::view('/blog-index','blog.index');
-Route::view('/blog-edit','blog.edit');
+// Route::resource('/blogs',BlogController::class);
+// Route::resource('/dashboards',BlogController::class);
 
-Route::view('/dashboard','dashboard.index');
+// Route::view('/blog-create','blog.create');
+
+// Route::view('/blog-index','blog.index');
+// Route::view('/blog-edit','blog.edit');
+
+// Route::view('/dashboard','dashboard.index');
 
 
 

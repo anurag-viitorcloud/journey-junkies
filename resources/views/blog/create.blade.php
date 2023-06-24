@@ -90,7 +90,9 @@
                         <div class="tab-content pt-2">
 
                             <div class="tab-pane fade show active english" id="english">
-
+                                <div> 
+                                    <p>asdasd</p>
+                                </div>
                             </div>
 
                             <div class="tab-pane fade hindi pt-3" id="hindi">
