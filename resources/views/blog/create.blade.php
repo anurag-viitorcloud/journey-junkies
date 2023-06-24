@@ -1208,7 +1208,7 @@
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" rows="9"></textarea>
+                                    <textarea class="form-control" name="desc" rows="9"></textarea>
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label font-bold">How You Want It?</label>
@@ -1267,7 +1267,13 @@
                 <div class="card">
                     <div class="card-body pt-3">
                         <h1 class="text-[23px] font-bold mb-4">Preview</h1>
-                        <div id="editor"></div>
+                        <div id="editor">
+                            <textarea>
+                            @if(!empty($blog))
+                                {!! $blog->post !!}
+                            @endif
+                            </textarea>
+                        </div>
                     </div>
                 </div>
             </div>
