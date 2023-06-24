@@ -26,14 +26,13 @@ class ImageController extends Controller
             // Get the date and location information
             $imagePath = public_path('blogImage') . '/' . $filename;
             $exifData = exif_read_data($imagePath);
-            $dateTaken = $exifData['DateTimeOriginal'] ?? null;
-            $location = $exifData['GPSLatitude'] ?? null;
+            $dateTaken = $exifData['DateTimeOriginal'] ?? "10/6/2023";
+            $location = $exifData['GPSLatitude'] ?? "India";
 
             // Process and store the date and location information as needed
-
             $imageData = response()->json([
-                'date_taken' => $dateTaken ?? "10/6/2023",
-                'location' => $location ?? "India",
+                'date_taken' => $dateTaken,
+                'location' => $location,
             ]);
 
             if ($imageData->original['date_taken'] != "null" || $imageData->original['location'] != "null") {
@@ -44,11 +43,11 @@ class ImageController extends Controller
 
                 $post_fields = '{
                     "model": "'.Constant::AI_MODEL.'",
-                    "prompt": "Act like a content writer and give me a travel blog for me in HTML format. I travelled on '.$request['date_taken'].' to '.$request['location'].'",
+                    "prompt": "Act like a content writer and give me a travel blog for me in HTML body. I travelled on '.$imageData->original['date_taken'].' to '.$imageData->original['location'].'. Also, This blog must be creative, SEO friendly & '.$request['desc'].' and must not have reapeted texts",
                     "max_tokens": '.Constant::AI_MAX_TOKENS.',
                     "temperature": '.Constant::AI_TEMPERATURE.'
                 }';
-                
+
                 $header  = [
                     'Content-Type: application/json',
                     'Authorization: Bearer ' . $api_key
@@ -75,7 +74,7 @@ class ImageController extends Controller
                         'title' => Constant::NULL,
                         'description' => Constant::NULL,
                         'post' => $responseData->choices[Constant::STATUS_ZERO]->text,
-                        'prompt' =>  "Act like a content writer and give me a travel blog for me in HTML format. I travelled on ".$request['date_taken']." to ".$request['location']."",
+                        'prompt' =>  "Act like a content writer and give me a travel blog for me in HTML body. I travelled on ".$imageData->original['date_taken']." to ".$imageData->original['location'].". Also, This blog must be creative, SEO friendly & ".$request['desc']." and must not have reapeted texts",
                         'date' => $request['date_taken'] ?? Constant::NULL,
                         'location' => $request['location'] ?? Constant::NULL,
                     ]);
@@ -85,12 +84,10 @@ class ImageController extends Controller
                     $response['data'] = Constant::EMPTY_ARRAY;
                 }
                 return redirect()->route('create-blog', ['blogId' => $blogId]);
-                // return view('blog.create', compact('responseData'));
             }
-            // return $imageData;
+            
         } catch (Exception $ex) {
             Log::error($ex);
-            // $response['message'] = trans('auth.something_went_wrong');
             return false;
         }
     }

@@ -6,12 +6,11 @@
  * Copyright (c) 2014, Jason Chen
  * Copyright (c) 2013, salesforce.com
  */
- .btn.active {
-            background-color: #2F2EE9 !important;
-            color: #FFF !important;
-            ;
+    .btn.active {
+        background-color: #2F2EE9 !important;
+        color: #FFF !important;
             /* Set your desired background color here */
-        }
+    }
         
     .ql-container {
         box-sizing: border-box;
@@ -1268,11 +1267,9 @@
                     <div class="card-body pt-3">
                         <h1 class="text-[23px] font-bold mb-4">Preview</h1>
                         <div id="editor">
-                            <textarea>
                             @if(!empty($blog))
                                 {!! $blog->post !!}
                             @endif
-                            </textarea>
                         </div>
                     </div>
                 </div>
