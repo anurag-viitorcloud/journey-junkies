@@ -10,10 +10,19 @@ use Illuminate\Support\Facades\Log;
 class openAIController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(protected ImageController $imageController)
+    {
+    }
+
+    /**
      * Create content.
      *
      */
-    public function createContent(Request $request)
+    public function createContent(array $request)
     {
         try { 
             $ch = curl_init();
@@ -23,7 +32,7 @@ class openAIController extends Controller
 
             $post_fields = '{
                 "model": "'.Constant::AI_MODEL.'",
-                "prompt": "'.$request['query'].'",
+                "prompt": "'.$request['date_taken'].'asdad'.$request['location'].'",
                 "max_tokens": "'.Constant::AI_MAX_TOKENS.'",
                 "temperature": "'.Constant::AI_TEMPERATURE.'"
             }';
@@ -49,6 +58,7 @@ class openAIController extends Controller
             $responseData = json_decode($result);
             var_dump($responseData->choices[Constant::STATUS_ZERO]->text);
                 
+            dd($responseData);
             if ($responseData) {
                 $response['data'] = $responseData;
             } else {

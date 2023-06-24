@@ -9,11 +9,22 @@ use Illuminate\Support\Facades\Log;
 class ImageController extends Controller
 {
     /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(protected openAIController $openAIController)
+    {
+        ini_set('memory_limit', '-1');
+    }
+
+    /**
      * Gather data from images.
      *
      */
     public function getImageData(Request $request)
     {
+        dd($request);
         try {
             $image = $request->file('image');
 
@@ -28,16 +39,17 @@ class ImageController extends Controller
             $location = $exifData['GPSLatitude'] ?? null;
 
             // Process and store the date and location information as needed
-
-            return response()->json([
+            $imageData = [
                 'date_taken' => $dateTaken,
                 'location' => $location,
-            ]);
+            ];
+
+            $this->openAIController->createContent($imageData);
+
         } catch (Exception $ex) {
             Log::error($ex);
             $response['message'] = trans('auth.something_went_wrong');
         }
-        Log::info($response);
         return $response;
     }
 }
