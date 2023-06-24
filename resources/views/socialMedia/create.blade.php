@@ -8,7 +8,7 @@
 }
 
 .mobile-data {
-  height: 69vh;
+  height: 85vh;
   display: grid;
   place-items: center;
   margin: 0;
