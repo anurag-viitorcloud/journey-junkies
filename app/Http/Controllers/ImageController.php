@@ -19,10 +19,10 @@ class ImageController extends Controller
     
             // Save the image
             $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads'), $filename);
+            $image->move(public_path('blogImage'), $filename);
         
             // Get the date and location information
-            $imagePath = public_path('uploads') . '/' . $filename;
+            $imagePath = public_path('blogImage') . '/' . $filename;
             $exifData = exif_read_data($imagePath);
             $dateTaken = $exifData['DateTimeOriginal'] ?? null;
             $location = $exifData['GPSLatitude'] ?? null;
@@ -38,7 +38,7 @@ class ImageController extends Controller
             Log::error($ex);
             $response['message'] = trans('auth.something_went_wrong');
         }
-
+        Log::info($response);
         return $response;
     }
 }

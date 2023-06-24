@@ -23,4 +23,5 @@ Route::get('/blog', function () {
     return view('blog.create');
 })->name('blog');
 
+Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
