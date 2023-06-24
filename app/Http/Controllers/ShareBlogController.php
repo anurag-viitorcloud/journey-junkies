@@ -20,12 +20,20 @@ class ShareBlogController extends Controller
         $accessTokenSecret = 'OiNi2Yj01GDscplRbIUCYONSegHBO0tcQqVp5QhvbRkb2';
 
         try {
-            $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+        //     $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+        //     $content = $connection->get("account/verify_credentials");
+        //    //dd($content);
+        //     // $parameters = [
+        //     //     'status' => 'Meow Meow Meow',
+        //     // ];
+        //     $result = $connection->post('statuses/update', ['status' => 'Meow Meow Meow']);
 
-            $parameters = [
-                'status' => 'Meow Meow Meow',
-            ];
-            $result = $connection->post('statuses/update', $parameters);
+        $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
+        $connection->setApiVersion("2");
+
+
+        $tweet_parameters['text'] = "Here is some text";
+        $result = $connection->post('tweets',$tweet_parameters,true);
 
             if ($connection->getLastHttpCode() === 200) {
                 return response()->json(['message' => 'Tweet created successfully'], 200);
