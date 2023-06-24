@@ -37,9 +37,7 @@ Route::get('/convertData', function () {
 Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
 
 Route::get('/social-media', function () {
-
     return view('socialMedia.create');
-
 })->name('social-media');
 // Route::resource('/blogs',BlogController::class);
 // Route::resource('/dashboards',BlogController::class);

@@ -6,12 +6,11 @@
  * Copyright (c) 2014, Jason Chen
  * Copyright (c) 2013, salesforce.com
  */
- .btn.active {
-            background-color: #2F2EE9 !important;
-            color: #FFF !important;
-            ;
+    .btn.active {
+        background-color: #2F2EE9 !important;
+        color: #FFF !important;
             /* Set your desired background color here */
-        }
+    }
         
     .ql-container {
         box-sizing: border-box;
@@ -1282,14 +1281,19 @@
             <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body pt-3">
-                        <h1 class="text-[23px] font-bold mb-4">Preview</h1>
-                        <div id="editor">
-                            <textarea>
-                            @if(!empty($blog))
-                                {!! $blog->post !!}
-                            @endif
-                            </textarea>
-                        </div>
+                        <form action="{{ route('convert') }}" method="POST">
+                            @csrf
+                            <h1 class="text-[23px] font-bold mb-4">Preview</h1>
+                            <div id="editor">
+                                @if(!empty($blog))
+                                    {!! $blog->post !!}
+                                @endif
+                            </div>
+                            <div class="col-sm-12 mt-3 float-right">
+                                <button type="button" class="btn btn-primary go-pro" id="download">Download
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -1303,7 +1307,7 @@
          
          var formData = new FormData();
          formData.append('image', file);
-         console.log('fileInput',fileInput,file,formData.append('file', file));
+         
          $.ajax({
              type: "Post",
              url: "{{ route('getImageData') }}",
@@ -1313,14 +1317,9 @@
              data:formData,
              processData: false, contentType: false,
              success: function (data) {
-                 console.log('Submission was successful.');
-                 console.log(data);
-                 if(data.location == null){
-                     
+                 if(data.location == null) {
                      $('#location').removeClass('hidden');
                      $('#label_location').removeClass('hidden');
- 
- 
                  }
              },
              error: function (data) {
@@ -1328,7 +1327,28 @@
                  console.log(data);
              },
          });
- });
+        });
+        
+        var formData = new FormData();
+        formData.append('htmldata', $('#editor').html());
+
+    $('#download').on('click', function() {
+        $.ajax({
+            type: "Post",
+            url: "{{ route('convert') }}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: formData,
+            processData: false, contentType: false,
+            success: function (data) {
+                // console.log(datas);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+            },
+        });
+    });
  
        </script>
          <script>
