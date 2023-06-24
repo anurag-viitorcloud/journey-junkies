@@ -1,6 +1,6 @@
 <html lang="en">
     <head >
-        <title style="color: brown">LOGIN/SIGN UP WITH ZAUR</title>
+        <title style="color: brown">SCIITOR | Forgot Password</title>
         <meta name="author" content="Zaur">
         <meta descryption content="Presentation of website">
         <meta name="keywords" content="technology, cyber security, software">
@@ -184,7 +184,7 @@
             justify-content: center;
             -ms-flex-align: center;
             align-items: center;
-            background-image: url('images/bg.jpeg');
+            background-image: url('../images/bg.jpeg');
             background-size: 100% 100%; 
             background-position: bottom;
             background-repeat: no-repeat;
