@@ -39,7 +39,7 @@ class ImageController extends Controller
                 $ch = curl_init();
                 $url = config('config-variables.openai_api_url').'completions';
 
-                $api_key = config('config-variables.openai_api_key');
+                $api_key = env('OPENAI_API_KEY');
 
                 $post_fields = '{
                     "model": "'.Constant::AI_MODEL.'",
@@ -102,7 +102,7 @@ class ImageController extends Controller
             $ch = curl_init();
             $url = config('config-variables.openai_api_url').'completions';
 
-            $api_key = config('config-variables.openai_api_key');
+            $api_key = env('OPENAI_API_KEY');
 
             $post_fields = '{
                 "model": "'.Constant::AI_MODEL.'",
