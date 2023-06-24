@@ -24,3 +24,11 @@ Route::get('/blog', function () {
 })->name('blog');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::post('/convert', [App\Http\Controllers\HtmlToXMLController::class, 'converToXML'])->name('convert');
+
+Route::get('/convertData', function () {
+    return view('convert');
+})->name('convertData');
+
+Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
