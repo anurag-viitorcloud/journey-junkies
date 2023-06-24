@@ -28,6 +28,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></script>
 
     <!-- Template Main CSS File -->
     <link href="css/style.css" rel="stylesheet">
@@ -64,7 +65,7 @@
     </style>
 </head>
 
-<body>
+<body >
     <div id="app">
         @extends('layouts.top-bar')
 
@@ -78,6 +79,7 @@
         @yield('script')
         @extends('layouts.footer')
     </div>
+    
 </body>
 
 </html>

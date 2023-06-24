@@ -82,3 +82,10 @@
     </nav><!-- End Icons Navigation -->
 
   </header><!-- End Header -->
+  <script>
+
+    $('.justify-content-between').on('click', function () {
+
+        $('body').toggleClass('toggle-sidebar')
+  });
+  </script>
