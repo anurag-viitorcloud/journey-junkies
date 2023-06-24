@@ -215,7 +215,6 @@
                                     <div class="time">9:41</div>
                                     <div class="blank"></div>
                                     <div class="icons">
-                                      <img src="{{ asset('images/mobile-signal-icon.png') }}" width="20px" height="20px" style="padding-left:5px"> <iconify-icon icon="ic:round-signal-cellular-alt" inline></iconify-icon>
                                       <iconify-icon icon="ic:round-wifi" inline ></iconify-icon>
                                       <iconify-icon icon="gg:battery-full" inline ></iconify-icon>
                                     </div>

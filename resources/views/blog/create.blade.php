@@ -19,6 +19,12 @@
                                     <input id="dropzone-file" type="file" name="image" class="hidden" />
                                 </label>
                             </div> 
+                            <label for="inputNumber" class="col-form-label mt-3 font-bold hidden" id="label_location">Location</label>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <input class="form-control hidden" name="location" id="location">
+                                </div>
+                            </div>
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
@@ -52,8 +58,18 @@
                                     <button type="button" class="text-white bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-purple-300 dark:focus:ring-purple-800 shadow-lg shadow-purple-500/50 dark:shadow-lg dark:shadow-purple-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">💪 Bold</button>
                                 </div>
                             </div>
+                            <label for="inputNumber" class="col-form-label mt-3 font-bold">Language</label>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <select name="language" class="form-select" aria-label=".form-select-lg example">
+                                        <option value="english">English</option>
+                                        <option value="hindi">Hindi</option>
+
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row mt-3">
-                                <button type="sumit" class="btn btn-primary go-pro">Write for me 👉</button>
+                                <button type="submit" class="btn btn-primary go-pro" id="writeContent">Write for me 👉</button>
                             </div>
                         </form>
                     </div>
@@ -103,4 +119,40 @@
             </div>
         </div>
     </section>
+    <script>
+       $('#dropzone-file').on('change', function() {
+        var fileInput = document.getElementById('dropzone-file');
+        var file = fileInput.files[0];
+        
+        var formData = new FormData();
+        formData.append('image', file);
+        console.log('fileInput',fileInput,file,formData.append('file', file));
+        $.ajax({
+            type: "Post",
+            url: "{{ route('getImageData') }}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data:formData,
+            processData: false, contentType: false,
+            success: function (data) {
+                console.log('Submission was successful.');
+                console.log(data);
+                if(data.location == null){
+                    
+                    $('#location').removeClass('hidden');
+                    $('#label_location').removeClass('hidden');
+
+
+                }
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+                console.log(data);
+            },
+        });
+});
+
+      </script>
 @endsection
+

@@ -27,6 +27,8 @@
     <link href="{{ asset('vendor/simple-datatables/style.css') }}" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
     <!-- Template Main CSS File -->
     <link href="css/style.css" rel="stylesheet">
     <style>
