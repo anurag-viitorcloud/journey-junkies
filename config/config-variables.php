@@ -5,5 +5,5 @@
 
 return [
     'openai_api_url' => 'https://api.openai.com/v1/',
-    'openai_api_key' => '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'
+    'openai_api_key' => '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'
 ];
