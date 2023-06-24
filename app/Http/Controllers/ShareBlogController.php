@@ -19,23 +19,21 @@ class ShareBlogController extends Controller
         $accessToken = '1672629635090198528-swMxYpR7V5LsBas53LjfLudqX4LlsN';
         $accessTokenSecret = 'OiNi2Yj01GDscplRbIUCYONSegHBO0tcQqVp5QhvbRkb2';
 
-        $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
-        // $media1 = $connection->upload('media/upload', ['media' =>  env('APP_URL').'/img/profile-img.jpg']);
-        // $media2 = $connection->upload('media/upload', ['media' =>  env('APP_URL').'/img/profile-img.jpg']);
-      
-        // $parameters = [
-        //     'status' => 'Meow Meow Meow',
-        //    'media_ids' => implode(',', [$media1->media_id_string, $media2->media_id_string])
-        // ];
-        // $result = $connection->post('statuses/update', $parameters);
+        try {
+            $connection = new TwitterOAuth($consumerKey, $consumerSecret, $accessToken, $accessTokenSecret);
 
-        $statues = $connection->post("statuses/update", ["status" => "hello world"]);
+            $parameters = [
+                'status' => 'Meow Meow Meow',
+            ];
+            $result = $connection->post('statuses/update', $parameters);
 
-        if ($connection->getLastHttpCode() === 200) {
+            if ($connection->getLastHttpCode() === 200) {
                 return response()->json(['message' => 'Tweet created successfully'], 200);
-            }else {
-                    return response()->json(['message' => 'Failed to create tweet'], 500);
-                }
+            }
+        } catch (\Exception $e) {
+            Log::error($e);
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
 
         // $tweet = "Hello test twitter";
 
@@ -46,7 +44,7 @@ class ShareBlogController extends Controller
         //     return response()->json(['error' => $e->getMessage()], 500);
         // }
 
-       
+
     }
 
     // public function redirect()
