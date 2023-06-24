@@ -1326,8 +1326,13 @@
                             <div class="col-sm-12 mt-3 float-right">
                                 <button type="submit" class="btn btn-primary go-pro" id="download">Download
                                 </button>
+                            </form>
+                            <form action="{{ route('convert') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
                                 <button type="button" class="btn btn-primary go-pro m-2" id="pdf">PDF
                                 </button>
+                            </form>
                             </div>
                         </form>
                     </div>
