@@ -31,10 +31,6 @@ Route::get('/social-media', function () {
 Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/mobile-view', function () {
-    return view('socialMedia.mobile-view');
-})->name('mobile-view');
-
 
 // Route::resource('/blogs',BlogController::class);
 // Route::resource('/dashboards',BlogController::class);
