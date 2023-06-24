@@ -38,12 +38,11 @@ class ImageController extends Controller
             if ($imageData->original['date_taken'] != "null" || $imageData->original['location'] != "null") {
                 $ch = curl_init();
                 $url = config('config-variables.openai_api_url').'completions';
-
                 $api_key = env('OPENAI_API_KEY');
 
                 $post_fields = '{
                     "model": "'.Constant::AI_MODEL.'",
-                    "prompt": "Act like a content writer and give me a travel blog for me in HTML body. I travelled on '.$imageData->original['date_taken'].' to '.$imageData->original['location'].'. Also, This blog must be creative, SEO friendly & '.$request['desc'].' and must not have reapeted texts",
+                    "prompt": "Act like a content writer and give me a travel blog for me in HTML body & in '.$request['language'].'. I travelled on '.$imageData->original['date_taken'].' to '.$imageData->original['location'].'. Also, This blog must be creative, SEO friendly & '.$request['desc'].' and must not have reapeted texts",
                     "max_tokens": '.Constant::AI_MAX_TOKENS.',
                     "temperature": '.Constant::AI_TEMPERATURE.'
                 }';
@@ -74,7 +73,7 @@ class ImageController extends Controller
                         'title' => Constant::NULL,
                         'description' => Constant::NULL,
                         'post' => $responseData->choices[Constant::STATUS_ZERO]->text,
-                        'prompt' =>  "Act like a content writer and give me a travel blog for me in HTML body. I travelled on ".$imageData->original['date_taken']." to ".$imageData->original['location'].". Also, This blog must be creative, SEO friendly & ".$request['desc']." and must not have reapeted texts",
+                        'prompt' =>  "Act like a content writer and give me a travel blog for me in HTML body. I travelled on ".$imageData->original['date_taken']." to ".$imageData->original['location'].". Also, This blog must be creative, SEO friendly & ".$request['desc']." and must not have repeated texts",
                         'date' => $request['date_taken'] ?? Constant::NULL,
                         'location' => $request['location'] ?? Constant::NULL,
                     ]);
