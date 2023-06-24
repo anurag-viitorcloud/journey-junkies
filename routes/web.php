@@ -30,6 +30,7 @@ Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getI
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::post('/convert', [App\Http\Controllers\HtmlToXMLController::class, 'converToXML'])->name('convert');
+Route::post('/convert-pdf', [App\Http\Controllers\HtmlToXMLController::class, 'converToPDF'])->name('convert-pdf');
 
 Route::get('/convertData', function () {
     return view('convert');
