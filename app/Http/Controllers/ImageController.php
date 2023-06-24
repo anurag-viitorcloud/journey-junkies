@@ -105,7 +105,7 @@ class ImageController extends Controller
 
             $post_fields = '{
                 "model": "'.Constant::AI_MODEL.'",
-                "prompt": "Act like a content writer and give me a travel blog for me in HTML body. I travelled on '.$request['date_taken'].' to '.$request['location'].'",
+                "prompt": "Give me an instagram caption which can be creative & '.$request['desc'].', in 30 words.",
                 "max_tokens": '.Constant::AI_MAX_TOKENS.',
                 "temperature": '.Constant::AI_TEMPERATURE.'
             }';
@@ -132,7 +132,6 @@ class ImageController extends Controller
             var_dump($responseData->choices[Constant::STATUS_ZERO]->text);
         
             if ($responseData) {
-                dd('as');
                 $response['data'] = $responseData;
                 return view('blog.create', compact($response['data']));
             } else {

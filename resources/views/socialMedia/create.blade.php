@@ -248,12 +248,11 @@
                                         </div>
                                     </div>
                                     <div class="gallery text-justify p-3">
-                                          <img src="{{ asset('images/profile-img.jpg')}}" alt="Cinque Terre" width="600" height="400" id="preview">
+                                          <img src="{{ asset('images/profile-img.jpg')}}" alt="Cinque Terre" width="600" height="400" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px;">
                                             <div class="desc mt-2">
-                                            <h2 class="font-bold">What is Lorem Ipsum? </h2>
+                                            <h2 class="font-bold">{{'@'.auth()->user()->name}} </h2>
                                             <p class="mt-2"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, b</p></div>
                                       </div>
-
                                     <div class="home"></div>
                                 </div>
                             </div>
