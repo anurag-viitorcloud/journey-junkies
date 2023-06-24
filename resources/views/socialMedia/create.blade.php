@@ -133,12 +133,28 @@
             ;
             /* Set your desired background color here */
         }
+        .loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+
     </style>
 @endsection
 
 @section('content')
     <section class="section profile">
         <div class="row">
+            <div id="loader" class="loader">
+                <img src="{{ asset('images/loading1-gif.gif') }}" alt="Loading...">
+              </div>
             <div class="col-xl-4">
 
                 <div class="card">
@@ -298,6 +314,7 @@
 
     <script>
         $(document).ready(function() {
+            $('.loader').hide();
             $('.btn.mode').click(function() {
                 $(this).toggleClass('active');
             });

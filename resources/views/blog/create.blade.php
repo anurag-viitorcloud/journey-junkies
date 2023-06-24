@@ -1177,8 +1177,7 @@
     .ql-container.ql-snow {
         border: 1px solid #ccc;
     }
-    #loader {
-  display: none;
+    .loader {
   position: fixed;
   top: 0;
   left: 0;
@@ -1186,14 +1185,9 @@
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9999;
-}
-
-.loader-content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  /* Additional styles for the loader content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 </style>
@@ -1201,12 +1195,10 @@
     <section class="section profile">
         <div class="row">
 
-            <div id="loader">
-                <div class="loader-content">
-                  <!-- Your loader content, e.g., spinning icon, loading text -->
-                  <i class="fas fa-spinner fa-spin"></i>
-                </div>
+            <div id="loader" class="loader">
+                <img src="{{ asset('images/loading1-gif.gif') }}" alt="Loading...">
               </div>
+              
               
             <div class="col-xl-4">
                 <div class="card">
@@ -1328,9 +1320,11 @@
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+   
     <script>
+        
         $('#dropzone-file').on('change', function() {
-            $('#loader').fadeIn();
+            $('.loader').show();
          var fileInput = document.getElementById('dropzone-file');
          var file = fileInput.files[0];
          
@@ -1350,7 +1344,7 @@
                      $('#location').removeClass('hidden');
                      $('#label_location').removeClass('hidden');
                     }
-                    $('#loader').fadeOut();
+                    $('.loader').hide();
              },
              error: function (data) {
                  console.log('An error occurred.');
@@ -1383,6 +1377,8 @@
        </script>
          <script>
             $(document).ready(function() {
+                $('.loader').hide();
+                
                 $('.btn.mode').click(function() {
                     $(this).toggleClass('active');
                 });
