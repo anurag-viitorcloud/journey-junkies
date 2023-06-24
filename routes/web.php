@@ -42,9 +42,7 @@ Route::get('/twitter/callback', [App\Http\Controllers\ShareBlogController::class
 
 
 Route::get('/social-media', function () {
-
     return view('socialMedia.create');
-
 })->name('social-media');
 // Route::resource('/blogs',BlogController::class);
 // Route::resource('/dashboards',BlogController::class);

@@ -1203,6 +1203,12 @@
                                     </div>
                                     <input id="dropzone-file" type="file" name="image" class="hidden" />
                                 </label>
+                            </div> 
+                            <label for="inputNumber" class="col-form-label mt-3 font-bold hidden" id="label_location">Location</label>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <input class="form-control hidden" name="location" id="location">
+                                </div>
                             </div>
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
@@ -1255,8 +1261,18 @@
                                         Bold</button>
                                 </div>
                             </div>
+                            <label for="inputNumber" class="col-form-label mt-3 font-bold">Language</label>
+                            <div class="row mb-3">
+                                <div class="col-sm-12">
+                                    <select name="language" class="form-select" aria-label=".form-select-lg example">
+                                        <option value="english">English</option>
+                                        <option value="hindi">Hindi</option>
+
+                                    </select>
+                                </div>
+                            </div>
                             <div class="row mt-3">
-                                <button type="sumit" class="btn btn-primary go-pro">Write for me 👉</button>
+                                <button type="submit" class="btn btn-primary go-pro" id="writeContent">Write for me 👉</button>
                             </div>
                         </form>
                     </div>
@@ -1265,18 +1281,83 @@
             <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body pt-3">
-                        <h1 class="text-[23px] font-bold mb-4">Preview</h1>
-                        <div id="editor">
-                            @if(!empty($blog))
-                                {!! $blog->post !!}
-                            @endif
-                        </div>
+                        <form action="{{ route('convert') }}" method="POST">
+                            @csrf
+                            <h1 class="text-[23px] font-bold mb-4">Preview</h1>
+                            <div id="editor">
+                                @if(!empty($blog))
+                                    {!! $blog->post !!}
+                                @endif
+                            </div>
+                            <div class="col-sm-12 mt-3 float-right">
+                                <button type="button" class="btn btn-primary go-pro" id="download">Download
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $('#dropzone-file').on('change', function() {
+         var fileInput = document.getElementById('dropzone-file');
+         var file = fileInput.files[0];
+         
+         var formData = new FormData();
+         formData.append('image', file);
+         
+         $.ajax({
+             type: "Post",
+             url: "{{ route('getImageData') }}",
+             headers: {
+                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+             },
+             data:formData,
+             processData: false, contentType: false,
+             success: function (data) {
+                 if(data.location == null) {
+                     $('#location').removeClass('hidden');
+                     $('#label_location').removeClass('hidden');
+                 }
+             },
+             error: function (data) {
+                 console.log('An error occurred.');
+                 console.log(data);
+             },
+         });
+        });
+        
+        var formData = new FormData();
+        formData.append('htmldata', $('#editor').html());
+
+    $('#download').on('click', function() {
+        $.ajax({
+            type: "Post",
+            url: "{{ route('convert') }}",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: formData,
+            processData: false, contentType: false,
+            success: function (data) {
+                // console.log(datas);
+            },
+            error: function (data) {
+                console.log('An error occurred.');
+            },
+        });
+    });
+ 
+       </script>
+         <script>
+            $(document).ready(function() {
+                $('.btn.mode').click(function() {
+                    $(this).toggleClass('active');
+                });
+            });
+        </script>
     <script>
         
         /*!
@@ -1297,3 +1378,4 @@
     const editor = new Quill('#editor', options);
     </script>
 @endsection
+

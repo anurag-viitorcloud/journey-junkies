@@ -27,7 +27,7 @@ class ImageController extends Controller
             $imagePath = public_path('blogImage') . '/' . $filename;
             $exifData = exif_read_data($imagePath);
             $dateTaken = $exifData['DateTimeOriginal'] ?? "10/6/2023";
-            $location = $exifData['GPSLatitude'] ?? "India";
+            $location = $exifData['GPSLatitude'] ?? $request['location'];
 
             // Process and store the date and location information as needed
             $imageData = response()->json([
