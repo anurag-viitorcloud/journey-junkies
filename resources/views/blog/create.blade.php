@@ -1331,6 +1331,13 @@
  });
  
        </script>
+         <script>
+            $(document).ready(function() {
+                $('.btn.mode').click(function() {
+                    $(this).toggleClass('active');
+                });
+            });
+        </script>
     <script>
         
         /*!
