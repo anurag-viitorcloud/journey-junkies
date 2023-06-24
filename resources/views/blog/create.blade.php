@@ -1177,10 +1177,37 @@
     .ql-container.ql-snow {
         border: 1px solid #ccc;
     }
+    #loader {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.loader-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Additional styles for the loader content */
+}
+
 </style>
 @section('content')
     <section class="section profile">
         <div class="row">
+
+            <div id="loader">
+                <div class="loader-content">
+                  <!-- Your loader content, e.g., spinning icon, loading text -->
+                  <i class="fas fa-spinner fa-spin"></i>
+                </div>
+              </div>
+              
             <div class="col-xl-4">
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
@@ -1303,6 +1330,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $('#dropzone-file').on('change', function() {
+            $('#loader').fadeIn();
          var fileInput = document.getElementById('dropzone-file');
          var file = fileInput.files[0];
          
@@ -1321,7 +1349,8 @@
                  if(data.location == null) {
                      $('#location').removeClass('hidden');
                      $('#label_location').removeClass('hidden');
-                 }
+                    }
+                    $('#loader').fadeOut();
              },
              error: function (data) {
                  console.log('An error occurred.');
