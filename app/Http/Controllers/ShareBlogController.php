@@ -28,30 +28,39 @@ class ShareBlogController extends Controller
         // if ($connection->getLastHttpCode() === 200) {
         //         return response()->json(['message' => 'Tweet created successfully'], 200);
         //     }else {
-                  
+
         //             return response()->json(['message' => 'Failed to create tweet'], 500);
         //         }
 
-       
+        $tweet = "Hello test twitter";
+
+        try {
+            Twitter::postTweet(['status' => $tweet]);
+            return response()->json(['message' => 'Tweet uploaded successfully']);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+
+
     }
 
-    public function redirect()
-    {
-        return Socialite::driver('twitter')->redirect();
-    }
+    // public function redirect()
+    // {
+    //     return Socialite::driver('twitter')->redirect();
+    // }
 
-    public function callback(Request $request)
-    {
-            $user = Socialite::driver('twitter')->user();
-            $token = $user->token;
-            $tokenSecret = $user->tokenSecret;
+    // public function callback(Request $request)
+    // {
+    //         $user = Socialite::driver('twitter')->user();
+    //         $token = $user->token;
+    //         $tokenSecret = $user->tokenSecret;
 
-            Twitter::reconfig([
-                'token' => $token,
-                'secret' => $tokenSecret
-            ]);
+    //         Twitter::reconfig([
+    //             'token' => $token,
+    //             'secret' => $tokenSecret
+    //         ]);
 
-            Twitter::postTweet(['status' => 'Hello from Laravel!']);
-    }
+    //         Twitter::postTweet(['status' => 'Hello from Laravel!']);
+    // }
 
 }
