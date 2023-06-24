@@ -95,9 +95,18 @@ class ImageController extends Controller
      * Create content.
      *
      */
-    public function createContent(array $request)
+    public function createContent(Request $request)
     {
         try { 
+            $image = $request->file('image');
+
+            // Save the image
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('socialImage'), $filename);
+
+            // Get the date and location information
+            $imagePath = public_path('socialImage') . '/' . $filename;
+
             $ch = curl_init();
             $url = config('config-variables.openai_api_url').'completions';
 
@@ -105,8 +114,8 @@ class ImageController extends Controller
 
             $post_fields = '{
                 "model": "'.Constant::AI_MODEL.'",
-                "prompt": "Give me an instagram caption which can be creative & '.$request['desc'].', in 30 words.",
-                "max_tokens": '.Constant::AI_MAX_TOKENS.',
+                "prompt": "Give me an instagram caption which can be creative & related to '.$request['desc'].' with related hashtags and must complete it in 30 words.",
+                "max_tokens": '.Constant::CAP_AI_MAX_TOKENS.',
                 "temperature": '.Constant::AI_TEMPERATURE.'
             }';
             
@@ -129,11 +138,11 @@ class ImageController extends Controller
             curl_close($ch);
 
             $responseData = json_decode($result);
-            var_dump($responseData->choices[Constant::STATUS_ZERO]->text);
+            // var_dump($responseData->choices[Constant::STATUS_ZERO]->text);
         
             if ($responseData) {
                 $response['data'] = $responseData;
-                return view('blog.create', compact($response['data']));
+                return view('socialMedia.create', compact('filename', 'responseData'));
             } else {
                 $response['data'] = Constant::EMPTY_ARRAY;
             }

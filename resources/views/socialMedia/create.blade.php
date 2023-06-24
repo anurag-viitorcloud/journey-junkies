@@ -143,7 +143,7 @@
 
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('create-caption')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <label for="inputNumber" class="col-form-label font-bold">File Upload</label>
                             <div class="flex items-center justify-center w-100 h-70">
@@ -166,14 +166,14 @@
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" rows="6"></textarea>
+                                    <textarea class="form-control" rows="6" name="desc"></textarea>
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label font-bold">How You Want It?</label>
                             <div class="row">
                                 <div class="col-md-6">
                                     <button type="button"
-                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2 ">😊
+                                        class="w-fit text-dark btn btn-info mode font-medium rounded-lg text-sm px-4 py-2.5 text-center mr-2 mb-2" name="tag" value="Friendly">😊
                                         Friendly</button>
                                 </div>
                                 <div class="col-md-6">
@@ -248,10 +248,20 @@
                                         </div>
                                     </div>
                                     <div class="gallery text-justify p-3">
+                                        @if(!empty($filename))
+                                          <img src="{{ asset('socialImage/'.$filename)}}" alt="Cinque Terre" width="600" height="400" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px;">
+                                          @else
                                           <img src="{{ asset('images/profile-img.jpg')}}" alt="Cinque Terre" width="600" height="400" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px;">
+                                        @endif
                                             <div class="desc mt-2">
                                             <h2 class="font-bold">{{'@'.auth()->user()->name}} </h2>
-                                            <p class="mt-2"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, b</p></div>
+                                            <p class="mt-2"> 
+                                                @if(!empty($responseData))
+                                                @foreach ($responseData->choices as $caption)
+                                                    {{ $caption->text ?? '' }}
+                                                @endforeach
+                                                @endif
+                                            </p></div>
                                       </div>
                                     <div class="home"></div>
                                 </div>

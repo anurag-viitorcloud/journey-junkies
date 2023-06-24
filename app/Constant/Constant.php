@@ -76,6 +76,7 @@ class Constant
     public const AI_PROMPT = 'Give me well optimised query of ';
     public const AI_TEMPERATURE = 0.3;
     public const AI_MAX_TOKENS = 300;
+    public const CAP_AI_MAX_TOKENS = 30;
     public const AI_TOP_P = 1.0;
     public const AI_FREQUENCY_PENALTY = 0.0;
     public const AI_PRESENCE_PENALTY = 0.0;

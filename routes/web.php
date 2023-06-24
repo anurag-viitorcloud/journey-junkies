@@ -25,7 +25,7 @@ Route::get('/blog', function () {
 })->name('blog');
 
 Route::get('/create-blog', [App\Http\Controllers\openAIController::class, 'createContent'])->name('create-blog');
-Route::get('/create-caption', [App\Http\Controllers\ImageController::class, 'createContent'])->name('create-caption');
+Route::post('/create-caption', [App\Http\Controllers\ImageController::class, 'createContent'])->name('create-caption');
 Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
