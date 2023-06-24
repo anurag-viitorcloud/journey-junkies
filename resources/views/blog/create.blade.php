@@ -7,12 +7,12 @@
 
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('getImageData') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <label for="inputNumber" class="col-form-label">File Upload</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <input class="form-control" type="file" id="formFile">
+                                    <input class="form-control" type="file" name="image" id="formFile">
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label">Description</label>
