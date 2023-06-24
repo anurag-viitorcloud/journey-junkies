@@ -1390,8 +1390,8 @@
     //     });
     // });
 
-    // var formData = new FormData();
-    //     formData.append('htmldata', $('#editor').html());
+    var formData = new FormData();
+        formData.append('htmldata', $('#editor').html());
 
     $('#pdf').on('click', function() {
         $.ajax({
