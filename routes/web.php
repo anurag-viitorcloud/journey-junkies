@@ -38,6 +38,11 @@ Route::get('/convertData', function () {
 })->name('convertData');
 
 Route::post('/getImageData', [App\Http\Controllers\ImageController::class, 'getImageData'])->name('getImageData');
+Route::post('/sendToZapier', [App\Http\Controllers\ShareBlogController::class, 'sendToZapier'])->name('sendToZapier');
+
+Route::get('/twitter/redirect', [App\Http\Controllers\ShareBlogController::class, 'redirect']);
+Route::get('/twitter/callback', [App\Http\Controllers\ShareBlogController::class, 'callback']);
+
 
 // Route::resource('/blogs',BlogController::class);
 // Route::resource('/dashboards',BlogController::class);

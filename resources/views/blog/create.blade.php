@@ -17,7 +17,7 @@
             <div class="col-xl-4">
                 <div class="card">
                     <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="{{ route('getImageData') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <label for="inputNumber" class="col-form-label font-bold">File Upload</label>
                             <div class="flex items-center justify-center w-100 h-70">
