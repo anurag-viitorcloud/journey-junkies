@@ -1213,7 +1213,7 @@
                             <label for="inputNumber" class="col-form-label mt-3 font-bold">Description</label>
                             <div class="row mb-3">
                                 <div class="col-sm-12">
-                                    <textarea class="form-control" name="desc" rows="9"></textarea>
+                                    <textarea class="form-control" name="desc" rows="6"></textarea>
                                 </div>
                             </div>
                             <label for="inputNumber" class="col-form-label font-bold">How You Want It?</label>
