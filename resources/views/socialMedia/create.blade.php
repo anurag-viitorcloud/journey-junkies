@@ -247,6 +247,12 @@
                                             <div class="blob red"></div>
                                         </div>
                                     </div>
+                                    <div class="gallery text-justify p-3">
+                                          <img src="{{ asset('images/profile-img.jpg')}}" alt="Cinque Terre" width="600" height="400">
+                                            <div class="desc mt-2">
+                                            <h2 class="font-bold">What is Lorem Ipsum? </h2>
+                                            <p class="mt-2"> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, b</p></div>
+                                      </div>
 
                                     <div class="home"></div>
                                 </div>
@@ -257,8 +263,11 @@
                                     <button class="btn btn-light"><img src="{{ asset('images/copy.png') }}"> Copy</button>
                                     <button class="btn btn-light"><img src="{{ asset('images/instagram.png') }}"
                                             width="15px" height="15px"> Instagram</button>
-                                    <button class="btn btn-light"><img src="{{ asset('images/twitter.png') }}">
+                                            <form method="POST" action="{{ route('sendToZapier') }}">
+                                                @csrf
+                                    <button type="submit" class="btn btn-light"><img src="{{ asset('images/twitter.png') }}">
                                         Twitter</button>
+                                            </form>
 
                                 </div>
 
