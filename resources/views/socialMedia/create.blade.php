@@ -287,22 +287,23 @@
                                           <img src="{{ asset('images/profile-img.jpg')}}" alt="Cinque Terre" width="600" height="400" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px;">
                                         @endif
                                             <div class="desc mt-2">
-                                            <h2 class="font-bold">{{'@'.auth()->user()->name}} </h2>
-                                            <p class="mt-2"> 
-                                                @if(!empty($responseData))
-                                                @foreach ($responseData->choices as $caption)
-                                                    {{ $caption->text ?? '' }}
-                                                @endforeach
-                                                @else
-                                                Write description to generate the caption...
-                                                @endif
-                                            </p></div>
+                                                <h2 class="font-bold">{{'@'.auth()->user()->name}} </h2>
+                                                <p class="mt-2" id="caption-txt"> 
+                                                    @if(!empty($responseData))
+                                                    @foreach ($responseData->choices as $caption)
+                                                        {{ $caption->text ?? '' }}
+                                                    @endforeach
+                                                    @else
+                                                        Write description to generate the caption...
+                                                    @endif
+                                                </p>
+                                            </div>
                                       </div>
                                     <div class="home"></div>
                                 </div>
                                 <div class="tab-pane fade show active english-data" id="english-data">
                                     <div class="social"> 
-                                        <button class="btn btn-light"><img src="{{ asset('images/copy.png') }}"> Copy</button>
+                                        <button class="btn btn-light"><img src="{{ asset('images/copy.png') }}" data-clipboard-target="#caption-txt" id="copy-text"> Copy</button>
                                         <button class="btn btn-light"><img src="{{ asset('images/instagram.png') }}"
                                                 width="15px" height="15px"> Instagram</button>
                                                 <form method="POST" action="{{ route('sendToZapier') }}">
@@ -331,6 +332,7 @@
 
 @section('script')
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/clipboard.js/1.5.12/clipboard.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -354,6 +356,10 @@
 
 $("#dropzone-file").change(function(){
     readURL(this);
+});
+
+$(function(){
+  new Clipboard('#copy-text');
 });
     </script>
 @endsection
