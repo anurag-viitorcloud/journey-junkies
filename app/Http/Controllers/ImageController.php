@@ -37,8 +37,7 @@ class ImageController extends Controller
             Log::error($ex);
             $response['message'] = trans('auth.something_went_wrong');
         }
-
-        dd($response);
+        Log::info($response);
         return $response;
     }
 }
