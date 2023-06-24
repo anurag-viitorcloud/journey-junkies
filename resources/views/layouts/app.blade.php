@@ -56,18 +56,8 @@
         }
 
         .mode {
-            display: flex !important;
-            padding: 10px !important;
-            align-items: flex-start !important;
-            gap: 10px !important;
-            width: 100% !important;
-            height: 40px !important;
-            flex-shrink: 0 !important;
-            border-radius: 10px !important;
-            font-size: 11px !important;
-            font-weight: 500 !important;
-            background-color: #d1d1d1 !important;
-            text-align: center !important;
+            background-color: #EAEDED !important;
+            border-color: #EAEDED !important;
         }
     </style>
 </head>
@@ -78,10 +68,12 @@
 
         @extends('layouts.sidebar')
 
+        @yield('style')
+
         <main id="main" class="main">
             @yield('content')
         </main>
-
+        @yield('script')
         @extends('layouts.footer')
     </div>
 </body>
