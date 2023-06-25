@@ -1,9 +1,30 @@
 @extends('layouts.app')
 
+@section('style')
+<style>
+.main-title{
+    color: var(--natural-1, #252525);
+    text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 40px;
+    font-family: Inter;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.sub-title{
+    color: var(--natural-2, #464D53);
+    text-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    font-size: 22px;
+    font-family: Inter;
+    line-height: 24px;
+}
+</style>
+@endsection
+
 @section('content')
     <div class="pagetitle" >
-        <h1 class="mt-5">Hey, {{ auth()->user()->name }} 👋</h1>
-        <h3 class="mt-2">What are your thoughts today?</h3>
+        <h1 class="mt-5 main-title">Hey, {{ auth()->user()->name }} 👋</h1>
+        <h3 class="mt-3 sub-title">What are your thoughts today?</h3>
     </div><!-- End Page Title -->
 
     <section class="section dashboard pt-8">

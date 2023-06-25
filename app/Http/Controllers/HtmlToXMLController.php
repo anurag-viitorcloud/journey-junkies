@@ -59,15 +59,15 @@ class HtmlToXMLController extends Controller
         $html = $request['htmldata'];
 
         // Generate PDF using the HTML content
-        $pdf = PDF::loadHTML($html);
+            $pdf = PDF::loadHTML($html);
 
-        // Set the appropriate headers for PDF response
-        $headers = [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="converted_file.pdf"',
-        ];
+            // Set the appropriate headers for PDF response
+            $headers = [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="converted_file.pdf"',
+            ];
 
-        // Return the PDF response for download
-        return response($pdf->output(), 200, $headers);
+            // Return the PDF response for download
+            return response($pdf->output(), 200, $headers);
     }
 }
