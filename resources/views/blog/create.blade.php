@@ -1223,7 +1223,7 @@
                                                 class="font-semibold">Click to upload</span> or drag and drop</p>
                                         <p class="text-xs text-gray-500 dark:text-gray-300">JPG</p>
                                     </div>
-                                    <input id="dropzone-file" type="file" name="image" class="hidden" />
+                                    <input id="dropzone-file" type="file" name="image" accept=".jpg, .jpeg" class="hidden" />
                                 </label>
                             </div> 
                             <label for="inputNumber" class="col-form-label mt-3 font-bold hidden" id="label_location">Location</label>
