@@ -1221,7 +1221,7 @@
                                         </svg>
                                         <p class="mb-2 text-sm text-gray-500 dark:text-gray-300"><span
                                                 class="font-semibold">Click to upload</span> or drag and drop</p>
-                                        <p class="text-xs text-gray-500 dark:text-gray-300">PNG or JPG</p>
+                                        <p class="text-xs text-gray-500 dark:text-gray-300">JPG</p>
                                     </div>
                                     <input id="dropzone-file" type="file" name="image" class="hidden" />
                                 </label>
@@ -1320,9 +1320,9 @@
                                         {!! $blog->post !!}
                                         @if(!empty($blog->title))
                                             <img src="{{ asset('blogImage/'.$blog->title)}}" alt="Cinque Terre" width="400" height="200" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px; float:center;">
-                                            @endif
                                         @endif
-                                    </div>
+                                    @endif
+                                </div>
                                     <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
                                 <div class="col-sm-12 mt-3 float-right d-flex">
                                     <button type="submit" class="btn btn-primary go-pro m-2" id="download">Download
@@ -1330,14 +1330,13 @@
                                 </div>
                             </form>
                         </div>
-                       <div style="    margin: 2px 0px 0px 110px;
-                       position: absolute;">
-                        <form action="{{ route('convert-pdf') }}" method="POST">
-                            @csrf
-                            <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
-                            <button type="submit" class="btn btn-primary go-pro m-2" id="pdf">PDF
-                            </button>
-                        </form>
+                       <div style="margin: 2px 0px 0px 110px; position: absolute;">
+                            <form action="{{ route('convert-pdf') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
+                                <button type="submit" class="btn btn-primary go-pro m-2" id="pdf">PDF
+                                </button>
+                            </form>
                        </div>
                 </div>
             </div>
