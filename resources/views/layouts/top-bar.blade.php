@@ -2,11 +2,12 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
+      <i class="bi bi-list toggle-sidebar-btn"></i>
       <a href="{{ route('home') }}" class="logo d-flex align-items-center">
         <img src="{{asset('images/ScriitorLogo.svg')}}" alt="" width="200px">
         {{-- <span class="d-none d-lg-block " style="color:#252525;text-align:center">SCRIITOR</span> --}}
       </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
+      
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
