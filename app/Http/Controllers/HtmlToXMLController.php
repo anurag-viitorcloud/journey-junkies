@@ -44,7 +44,7 @@ class HtmlToXMLController extends Controller
         // $response = Response::create($xml, 200);
         $response->header('Cache-Control', 'public');
         $response->header('Content-Description', 'File Transfer');
-        $response->header('Content-Disposition', 'attachment; filename=test.xml');
+        $response->header('Content-Disposition', 'attachment; filename=blog.xml');
         $response->header('Content-Transfer-Encoding', 'binary');
         $response->header('Content-Type', 'text/xml');
         return $response;
@@ -64,7 +64,7 @@ class HtmlToXMLController extends Controller
         // Set the appropriate headers for PDF response
         $headers = [
             'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'attachment; filename="converted_file.pdf"',
+            'Content-Disposition' => 'attachment; filename="blog.pdf"',
         ];
 
         // Return the PDF response for download
