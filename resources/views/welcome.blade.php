@@ -234,6 +234,7 @@
             font-weight: 500;
             text-align: center;
             letter-spacing: 1px;
+            margin-top: 20px;
         }
 
         .container.quote-container {
@@ -661,11 +662,12 @@
         <div class="form-container  sign-up-container">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
-                <div class="header">Sign Up</div>
-                <span class="under__social">
+                <img src="{{asset('images/ScriitorLogo.svg')}}" alt="" width="150px">
+                <div class="header mt-3">Sign Up</div>
+                {{-- <span class="under__social">
                     <a href="#" class="link signin-link">or use your email for registration
                     </a>
-                </span>
+                </span> --}}
 
                 <div class="button-input-group">
                     <div class="group input-group">
@@ -693,10 +695,11 @@
         <div class="form-container  sign-in-container">
             <form method="POST" action="{{ route('login') }}">
                 @csrf
-                <div class="header">Sign In</div>
-                <span class="under__social">
+                <img src="{{asset('images/ScriitorLogo.svg')}}" alt="" width="150px">
+                <div class="header mt-4">Sign In</div>
+                {{-- <span class="under__social">
                     <a href="#" class="link signup-link">or use your account</a>
-                </span>
+                </span> --}}
 
                 <div class="button-input-group">
                     <div class="group input-group">
