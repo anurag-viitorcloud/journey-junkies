@@ -1311,31 +1311,34 @@
             <div class="col-xl-8">
                 <div class="card">
                     <div class="card-body pt-3">
-                        <form action="{{ route('convert') }}" method="POST">
-                            @csrf
-                            <h1 class="text-[23px] font-bold mb-4">Preview</h1>
-                            <div id="editor">
-                                @if(!empty($blog))
-                                    {!! $blog->post !!}
-                                    @if(!empty($blog->title))
-                                        <img src="{{ asset('blogImage/'.$blog->title)}}" alt="Cinque Terre" width="400" height="200" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px; float:center;">
-                                        @endif
-                                    @endif
-                                </div>
-                                <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
-                            <div class="col-sm-12 mt-3 float-right">
-                                <button type="submit" class="btn btn-primary go-pro" id="download">Download
-                                </button>
-                            </form>
+                        <div>
                             <form action="{{ route('convert') }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
-                                <button type="button" class="btn btn-primary go-pro m-2" id="pdf">PDF
-                                </button>
+                                <h1 class="text-[23px] font-bold mb-4">Preview</h1>
+                                <div id="editor">
+                                    @if(!empty($blog))
+                                        {!! $blog->post !!}
+                                        @if(!empty($blog->title))
+                                            <img src="{{ asset('blogImage/'.$blog->title)}}" alt="Cinque Terre" width="400" height="200" id="preview" style="height:271px; max-height: 200px; max-width:336px; width: 200px; float:center;">
+                                            @endif
+                                        @endif
+                                    </div>
+                                    <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
+                                <div class="col-sm-12 mt-3 float-right d-flex">
+                                    <button type="submit" class="btn btn-primary go-pro m-2" id="download">Download
+                                    </button>
+                                </div>
                             </form>
-                            </div>
+                        </div>
+                       <div style="    margin: 2px 0px 0px 110px;
+                       position: absolute;">
+                        <form action="{{ route('convert-pdf') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="htmldata" value="{!! $blog->post ?? '' !!}">
+                            <button type="submit" class="btn btn-primary go-pro m-2" id="pdf">PDF
+                            </button>
                         </form>
-                    </div>
+                       </div>
                 </div>
             </div>
         </div>

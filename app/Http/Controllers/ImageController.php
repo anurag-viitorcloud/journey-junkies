@@ -42,7 +42,7 @@ class ImageController extends Controller
 
                 $post_fields = '{
                     "model": "'.Constant::AI_MODEL.'",
-                    "prompt": "Act like a content writer and give me a travel blog for me in HTML body & in '.$request['language'].'. I travelled on '.$imageData->original['date_taken'].' to '.$imageData->original['location'].'. Also, This blog must be creative, SEO friendly & '.$request['desc'].' and must not have reapeted texts. Finish in 600 words",
+                    "prompt": "Act like a content writer and write a travel blog for me in HTML body & in '.$request['language'].'. I travelled on '.$imageData->original['date_taken'].' to '.$imageData->original['location'].'. Also, This blog must be creative, SEO friendly & '.$request['desc'].' and must not have reapeted texts. Finish in 600 words",
                     "max_tokens": '.Constant::AI_MAX_TOKENS.',
                     "temperature": '.Constant::AI_TEMPERATURE.'
                 }';
